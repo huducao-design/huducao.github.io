@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoodThingWorld | 发现美好事物</title>
+    <style>
+        /* 基础重置与全局样式 */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background-color: #f9f9f9; }
+        a { text-decoration: none; color: inherit; }
+        
+        /* 导航栏 */
+        header {
+            background: #fff;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .logo { font-size: 1.5rem; font-weight: 800; color: #2c3e50; letter-spacing: 1px; }
+        .logo span { color: #e67e22; }
+
+        /* 语言切换按钮 */
+        .lang-switcher button {
+            padding: 0.4rem 1rem;
+            border: 2px solid #2c3e50;
+            background: transparent;
+            color: #2c3e50;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-left: 0.5rem;
+        }
+        .lang-switcher button.active, .lang-switcher button:hover {
+            background: #2c3e50;
+            color: #fff;
+        }
+
+        /* 欢迎横幅 */
+        .hero {
+            text-align: center;
+            padding: 6rem 5%;
+            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+        }
+        .hero h1 { font-size: 3rem; margin-bottom: 1rem; color: #2c3e50; }
+        .hero p { font-size: 1.2rem; color: #666; max-width: 600px; margin: 0 auto; }
+
+        /* 通用区块标题 */
+        .section-title {
+            text-align: center;
+            padding: 3rem 0 2rem;
+            font-size: 2rem;
+            color: #2c3e50;
+        }
+
+        /* 产品展示区 */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: 0 5% 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .product-card {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+        .product-card:hover { transform: translateY(-5px); }
+        .product-img { width: 100%; height: 200px; background: #ddd; display: flex; align-items: center; justify-content: center; color: #888; font-size: 0.9rem; }
+        .product-info { padding: 1.5rem; }
+        .product-info h3 { margin-bottom: 0.5rem; font-size: 1.2rem; }
+        .product-info p { color: #777; font-size: 0.9rem; margin-bottom: 1rem; }
+        .btn {
+            display: inline-block;
+            padding: 0.5rem 1.2rem;
+            background: #e67e22;
+            color: #fff;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+        }
+        .btn:hover { background: #d35400; }
+
+        /* 视频展播区 */
+        .video-section { background: #2c3e50; padding: 4rem 5%; color: #fff; }
+        .video-section .section-title { color: #fff; }
+        .video-container {
+            max-width: 900px;
+            margin: 0 auto;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 比例 */
+            height: 0;
+            background: #000;
+        }
+        .video-container iframe, .video-container video {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border: none;
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .hero p { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 导航栏 -->
+    <header>
+        <div class="logo">Good<span>Thing</span>World</div>
+        <div class="lang-switcher">
+            <button id="btn-zh" class="active" onclick="switchLang('zh')">中文</button>
+            <button id="btn-en" onclick="switchLang('en')">EN</button>
+        </div>
+    </header>
+
+    <!-- 欢迎横幅 -->
+    <section class="hero">
+        <h1 data-zh="欢迎来到 GoodThingWorld" data-en="Welcome to GoodThingWorld">欢迎来到 GoodThingWorld</h1>
+        <p data-zh="我们致力于在全球范围内发掘、分享和传递那些能提升生活品质的“美好事物”。在这里，发现属于你的小确幸。" 
+           data-en="We are dedicated to discovering, sharing, and delivering 'good things' worldwide that enhance your quality of life. Find your little joys here.">
+            我们致力于在全球范围内发掘、分享和传递那些能提升生活品质的“美好事物”。在这里，发现属于你的小确幸。
+        </p>
+    </section>
+
+    <!-- 产品展示 -->
+    <h2 class="section-title" data-zh="🌟 精选好物" data-en="🌟 Featured Products">🌟 精选好物</h2>
+    <div class="products-grid">
+        <!-- 产品 1 -->
+        <div class="product-card">
+            <div class="product-img" data-zh="产品图片占位" data-en="Product Image">产品图片占位</div>
+            <div class="product-info">
+                <h3 data-zh="极简手工陶瓷杯" data-en="Minimalist Handmade Ceramic Cup">极简手工陶瓷杯</h3>
+                <p data-zh="由独立匠人手工拉胚烧制，触感温润，让每一次饮水都成为享受。" 
+                   data-en="Hand-thrown by independent artisans. Warm to the touch, making every sip a delight.">
+                    由独立匠人手工拉胚烧制，触感温润，让每一次饮水都成为享受。
+                </p>
+                <a href="#" class="btn" data-zh="了解更多" data-en="Learn More">了解更多</a>
+            </div>
+        </div>
+        <!-- 产品 2 -->
+        <div class="product-card">
+            <div class="product-img" data-zh="产品图片占位" data-en="Product Image">产品图片占位</div>
+            <div class="product-info">
+                <h3 data-zh="天然植物香薰蜡烛" data-en="Natural Botanical Scented Candle">天然植物香薰蜡烛</h3>
+                <p data-zh="精选大豆蜡与天然精油，点燃瞬间，用自然香气抚平一天的疲惫。" 
+                   data-en="Premium soy wax and essential oils. Light it up to soothe your mind with natural aromas.">
+                    精选大豆蜡与天然精油，点燃瞬间，用自然香气抚平一天的疲惫。
+                </p>
+                <a href="#" class="btn" data-zh="了解更多" data-en="Learn More">了解更多</a>
+            </div>
+        </div>
+        <!-- 产品 3 -->
+        <div class="product-card">
+            <div class="product-img" data-zh="产品图片占位" data-en="Product Image">产品图片占位</div>
+            <div class="product-info">
+                <h3 data-zh="复古机械键盘" data-en="Vintage Mechanical Keyboard">复古机械键盘</h3>
+                <p data-zh="经典打字机键帽搭配现代轴体，敲击声清脆，是桌面美学与手感的完美结合。" 
+                   data-en="Classic typewriter keycaps with modern switches. A perfect blend of desk aesthetics and tactile feel.">
+                    经典打字机键帽搭配现代轴体，敲击声清脆，是桌面美学与手感的完美结合。
+                </p>
+                <a href="#" class="btn" data-zh="了解更多" data-en="Learn More">了解更多</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 视频展播 -->
+    <section class="video-section">
+        <h2 class="section-title" data-zh="🎬 品牌故事展播" data-en="🎬 Brand Story Video">🎬 品牌故事展播</h2>
+        <div class="video-container">
+            <!-- 
+                提示：你可以将下方的 src 替换为你自己的视频链接。
+                如果是本地视频，请使用 <video src="your-video.mp4" controls></video>
+                这里以 YouTube 嵌入为例，若在国内使用可替换为 Bilibili 的 iframe 代码 
+            -->
+            <iframe 
+                src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                title="GoodThingWorld Video" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+        </div>
+    </section>
+
+    <script>
+        // 语言切换核心逻辑
+        function switchLang(lang) {
+            // 更新按钮激活状态
+            document.getElementById('btn-zh').classList.toggle('active', lang === 'zh');
+            document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+
+            // 遍历所有带有 data-zh 和 data-en 属性的元素并替换文本
+            const elements = document.querySelectorAll('[data-zh][data-en]');
+            elements.forEach(el => {
+                el.textContent = el.getAttribute(`data-${lang}`);
+            });
+
+            // 可选：更新网页标题
+            document.title = lang === 'zh' ? 'GoodThingWorld | 发现美好事物' : 'GoodThingWorld | Discover Good Things';
+        }
+    </script>
+</body>
+</html>
